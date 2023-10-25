@@ -2,6 +2,7 @@
 
 cd /workspace
 
+
 sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
 
 wget -O- https://apt.releases.hashicorp.com/gpg | \
@@ -24,5 +25,7 @@ sudo apt-get install terraform -y
 
 terraform -help
 
+
 cd $PROJECT_ROOT
+
 
