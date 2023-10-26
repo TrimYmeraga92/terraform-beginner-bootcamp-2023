@@ -263,7 +263,7 @@ Provide the following code (replace your token in the file):
 {
     "credentials": {
       "app.terraform.io": {
-        "token": "udPqIHIMiDEJEw.atlasv1.ry5KRYxaJ1WmT9dkCQKTXq3Dn7vhuXxbo8Peij3OjsduiyfzH55mo1zy91sjsQln9Ws"
+        "token": "your token"
       }
     }
   }
