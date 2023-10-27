@@ -11,3 +11,27 @@
 -[Github Markdown TOC Generator](https://ecotrust-canada.github.io/markdown/toc/)
 
 
+
+
+## Dealing with Configuration Drift
+
+### What happend if we lose our state file?
+
+If you lose your statefile, you most likely have to tear down all your cloud infrastructure manually 
+
+You can use tf import but it wont work for all resources, you need to check the terraform providers documentation for which resources support tf import.
+
+### Fix Missing Resources Terraform Import
+
+`terraform import aws_s3_bucket.example`
+
+[Terraform Import](https://developer.hashicorp.com/terraform/cli/import)
+[AWS S3 bucket Import](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#import)
+
+
+### Fix Manual Configuration
+
+If someone goes and delete or modifies cloud resources manually through clickops.
+
+If we run Terraform plan is with attmept to put our Infrastructure back into the expected state fixing Configuration Drift
+
