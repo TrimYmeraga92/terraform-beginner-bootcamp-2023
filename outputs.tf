@@ -1,4 +1,4 @@
-
-output "random_bucket_name" {
-  value = random_string.bucket_name.result
+output "confirmed_bucket_name" {
+  value = var.bucket_name
+  description = "Confirmed name of the AWS S3 bucket"
 }
