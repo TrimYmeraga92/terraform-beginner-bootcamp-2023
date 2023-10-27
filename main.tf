@@ -1,15 +1,33 @@
+terraform {
 
-# https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string
+  # terraform {
+  #   backend "remote" {
+  #     organization = "example_corp"
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
-resource "aws_s3_bucket" "example" {
-  # https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
-  #Bucket naming rules
-  bucket = var.bucket_name
-tags = {
-  UserUuid = var.user_uuid
+  #     workspaces {
+  #       name = "my-app-prod"
+  #     }
+  #   }
+  # }
+
+
+  #   cloud {
+  #     organization = "Tridi"
+
+  #     workspaces {
+  #       name = "terra-house-1"
+  #     }
+  #   }
 }
+
+
+module "terrahouse_aws" {
+  source      = "./modules/terrahouse_aws"
+  user_uuid   = var.user_uuid
+  bucket_name = var.bucket_name
+
 }
+
 
 
 
