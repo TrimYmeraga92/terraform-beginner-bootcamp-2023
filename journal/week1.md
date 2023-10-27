@@ -73,3 +73,4 @@ You can use tf import but it wont work for all resources, you need to check the 
 If someone goes and delete or modifies cloud resources manually through clickops.
 
 If we run Terraform plan is with attmept to put our Infrastructure back into the expected state fixing Configuration Drift
+
