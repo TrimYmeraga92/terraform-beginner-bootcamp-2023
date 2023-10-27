@@ -11,7 +11,7 @@ Our root module structure is as follows:
   - main.tf - everything else.
   - providers.tf - defined required providers and their configuration
   - outputs.tf - stores our outputs
-  - terraform.tvvars - the data of variables we wnat to load into our terraform project
+  - terraform.tfvars - the data of variables we wnat to load into our terraform project
   - Readme.md - required for root modules
 
 
