@@ -4,18 +4,18 @@
 
 [How to Delete Local and Remote Tags on Git](https://devconnected.com/how-to-delete-local-and-remote-tags-on-git/)
 
-
-Localy delete tag
+Locall delete a tag
 ```sh
 git tag -d <tag_name>
 ```
 
-Remotely delete tag 
+Remotely delete tag
+
 ```sh
-$ git push --delete origin tagname
+git push --delete origin tagname
 ```
 
-Checkout the commit that you want to retag.Grab the sha from your Github history
+Checkout the commit that you want to retag. Grab the sha from your Github history.
 
 ```sh
 git checkout <SHA>
@@ -23,116 +23,109 @@ git tag M.M.P
 git push --tags
 git checkout main
 ```
-## Root Module Structure
 
+## Root Module Structure
 
 Our root module structure is as follows:
 
 ```
 PROJECT_ROOT
-|-- main.tf - everything else.
-|-- variables.tf - stores the structure of input variables
-|-- providers.tf - defined required providers and their configuration
-|-- outputs.tf - stores our outputs
-|-- terraform.tvvars - the data of variables we want to load into our Terraform project
-|-- Readme.md - required for root modules
+│
+├── main.tf                 # everything else.
+├── variables.tf            # stores the structure of input variables
+├── terraform.tfvars        # the data of variables we want to load into our terraform project
+├── providers.tf            # defined required providers and their configuration
+├── outputs.tf              # stores our outputs
+└── README.md               # required for root modules
 ```
 
+[Standard Module Structure](https://developer.hashicorp.com/terraform/language/modules/develop/structure)
 
-
--[Standard Module Structure] (https://developer.hashicorp.com/terraform/language/modules/develop/structure)
-
-## Terraform and input variables
+## Terraform and Input Variables
 
 ### Terraform Cloud Variables
 
-in terraform we can set two kind of variables:
-
-- Environment Variables - those you would set in your bash terminal eg. AWS Credentials
+In terraform we can set two kind of variables:
+- Enviroment Variables - those you would set in your bash terminal eg. AWS credentials
 - Terraform Variables - those that you would normally set in your tfvars file
 
-We can set Terraform Cloud variables to be sensitive so they are not shown visibly in the UI.
+We can set Terraform Cloud variables to be sensitive so they are not shown visibliy in the UI.
 
+### Loading Terraform Input Variables
 
-### Loading Terraform input variables
+[Terraform Input Variables](https://developer.hashicorp.com/terraform/language/values/variables)
 
-
-#### var flag
+### var flag
 We can use the `-var` flag to set an input variable or override a variable in the tfvars file eg. `terraform -var user_ud="my-user_id"`
 
-#### var-file flag
+### var-file flag
 
-To set lots of variables, it is more convenient to specify their values in a variable definitions file (with a filename ending in either .tfvars or .tfvars.json) and then specify that file on the command line with -var-file:
+- TODO: document this flag
 
+### terraform.tvfars
 
-#### terraform.tfvars
+This is the default file to load in terraform variables in blunk
 
-This is the default file to load in therraform variables in blunk 
+### auto.tfvars
 
-#### auto.tfvars
+- TODO: document this functionality for terraform cloud
 
-Variables in the Terraform Cloud workspace and variables provided through the command line always overwrite variables with the same key from files ending in `.auto.tfvars.`
+### order of terraform variables
 
+- TODO: document which terraform variables takes presendence.
 
-## Dealing with Configuration Drift
+## Dealing With Configuration Drift
 
-### What happend if we lose our state file?
+## What happens if we lose our state file?
 
-If you lose your statefile, you most likely have to tear down all your cloud infrastructure manually 
+If you lose your statefile, you most likley have to tear down all your cloud infrastructure manually.
 
-You can use tf import but it wont work for all resources, you need to check the terraform providers documentation for which resources support tf import.
+You can use terraform port but it won't for all cloud resources. You need check the terraform providers documentation for which resources support import.
 
-### Fix using Terraform Refresh
+### Fix Missing Resources with Terraform Import
 
-```sh
-terraform apply -refresh-only -auto-approve
-
-```
-
-### Fix Missing Resources Terraform Import
-
-`terraform import aws_s3_bucket.example`
+`terraform import aws_s3_bucket.bucket bucket-name`
 
 [Terraform Import](https://developer.hashicorp.com/terraform/cli/import)
-[AWS S3 bucket Import](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#import)
-
+[AWS S3 Bucket Import](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#import)
 
 ### Fix Manual Configuration
 
-If someone goes and delete or modifies cloud resources manually through clickops.
+If someone goes and delete or modifies cloud resource manually through ClickOps. 
 
+If we run Terraform plan is with attempt to put our infrstraucture back into the expected state fixing Configuration Drift
 
-If we run Terraform plan is with attmept to put our Infrastructure back into the expected state fixing Configuration Drift
+## Fix using Terraform Refresh
 
+```sh
+terraform apply -refresh-only -auto-approve
+```
 
 ## Terraform Modules
 
 ### Terraform Module Structure
 
-It is recommended to place modules in a `modules` directory when locally developing modules but you can name it whatever you like.
+It is recommend to place modules in a `modules` directory when locally developing modules but you can name it whatever you like.
 
 ### Passing Input Variables
 
 We can pass input variables to our module.
-The module has to declare the terraform variable in its own variable.tf
+The module has to declare the terraform variables in its own variables.tf
 
 ```tf
 module "terrahouse_aws" {
   source = "./modules/terrahouse_aws"
   user_uuid = var.user_uuid
   bucket_name = var.bucket_name
-  
 }
 ```
 
-### Modules Source
+### Modules Sources
 
-
-using the source we can importe the module from various places eg:
-
--locally
--Github
--Terraform Registry
+Using the source we can import the module from various places eg:
+- locally
+- Github
+- Terraform Registry
 
 ```tf
 module "terrahouse_aws" {
@@ -140,29 +133,29 @@ module "terrahouse_aws" {
 }
 ```
 
-[Modules Sources](https://developer.hashicorp.com/terraform/language/modules)
 
+[Modules Sources](https://developer.hashicorp.com/terraform/language/modules/sources)
 
+## Considerations when using ChatGPT to write Terraform
 
-## Consideration when using ChatGPT to write Terraform 
+LLMs such as ChatGPT may not be trained on the latest documentation or information about Terraform.
 
-LLms such as ChatGPT may not be trained on the latest documentation or information about Terraform.
+It may likely produce older examples that could be deprecated. Often affecting providers.
 
-It may likely produce older examples that could be depricated. Often affecting providers.
-
-
-## Working with Files in Terraform 
+## Working with Files in Terraform
 
 
 ### Fileexists function
 
-This is a build in terraform function to check the existance of a file.
+This is a built in terraform function to check the existance of a file.
 
 ```tf
-condition = fileexists(var.index_html_filepath)
+condition = fileexists(var.error_html_filepath)
 ```
 
-### Filemd5 examample
+https://developer.hashicorp.com/terraform/language/functions/fileexists
+
+### Filemd5
 
 https://developer.hashicorp.com/terraform/language/functions/filemd5
 
@@ -171,7 +164,49 @@ https://developer.hashicorp.com/terraform/language/functions/filemd5
 In terraform there is a special variable called `path` that allows us to reference local paths:
 - path.module = get the path for the current module
 - path.root = get the path for the root module
-
 [Special Path Variable](https://developer.hashicorp.com/terraform/language/expressions/references#filesystem-and-workspace-info)
 
 
+resource "aws_s3_object" "index_html" {
+  bucket = aws_s3_bucket.website_bucket.bucket
+  key    = "index.html"
+  source = "${path.root}/public/index.html"
+}
+
+## Terraform Locals
+
+Locals allows us to define local variables.
+It can be very useful when we need transform data into another format and have referenced a varaible.
+
+```tf
+locals {
+  s3_origin_id = "MyS3Origin"
+}
+```
+[Local Values](https://developer.hashicorp.com/terraform/language/values/locals)
+
+## Terraform Data Sources
+
+This allows use to source data from cloud resources.
+
+This is useful when we want to reference cloud resources without importing them.
+
+```tf
+data "aws_caller_identity" "current" {}
+
+output "account_id" {
+  value = data.aws_caller_identity.current.account_id
+}
+```
+[Data Sources](https://developer.hashicorp.com/terraform/language/data-sources)
+
+## Working with JSON
+
+We use the jsonencode to create the json policy inline in the hcl.
+
+```tf
+> jsonencode({"hello"="world"})
+{"hello":"world"}
+```
+
+[jsonencode](https://developer.hashicorp.com/terraform/language/functions/jsonencode)
