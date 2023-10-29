@@ -39,3 +39,13 @@ variable "error_html_filepath" {
     error_message = "The provided path for error.html does not exist."
   }
 }
+
+variable "content_version" {
+  type        = number
+  description = "Content version (positive integer starting at 1)"
+  
+  validation {
+    condition     = var.content_version > 0 && can(regex("^[1-9]\\d*$", tostring(var.content_version)))
+    error_message = "Please provide a positive integer starting at 1 for the content version."
+  }
+}
