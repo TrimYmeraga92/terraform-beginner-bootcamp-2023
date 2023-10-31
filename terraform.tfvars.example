@@ -3,3 +3,4 @@ bucket_name = "tridismakaroni090901-193"
 index_html_filepath= "/workspace/terraform-beginner-bootcamp-2023/Public/index.html"
 error_html_filepath= "/workspace/terraform-beginner-bootcamp-2023/Public/error.html"
 content_version = 2
+assets_path = ${ROOT.PROJECT}/Public/assets
