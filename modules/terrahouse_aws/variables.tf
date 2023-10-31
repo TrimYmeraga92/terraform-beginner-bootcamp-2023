@@ -41,11 +41,16 @@ variable "error_html_filepath" {
 }
 
 variable "content_version" {
+  description = "The content version. Should be a positive integer starting at 1."
   type        = number
-  description = "Content version (positive integer starting at 1)"
-  
+
   validation {
-    condition     = var.content_version > 0 && can(regex("^[1-9]\\d*$", tostring(var.content_version)))
-    error_message = "Please provide a positive integer starting at 1 for the content version."
+    condition     = var.content_version > 0 && floor(var.content_version) == var.content_version
+    error_message = "The content_version must be a positive integer starting at 1."
   }
+}
+
+variable "assets_path" {
+  description = "Path to assets folder"
+  type = string
 }
