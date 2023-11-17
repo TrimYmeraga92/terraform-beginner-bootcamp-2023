@@ -33,4 +33,4 @@ override.tf.json
 .terraformrc
 terraform.rc
 
-terraform-providers-terratowns/terraform-provider-terratowns_v*
+/workspace/terraform-beginner-bootcamp-2023/terraform-provider-terratowns/terraform-provider-terratowns_v*
