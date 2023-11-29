@@ -1,6 +1,5 @@
-user_uuid = "0336e679-fc2b-4b3c-bf58-db41bf6a5f5b"
-bucket_name = "tridismakaroni090901-193"
-index_html_filepath= "/workspace/terraform-beginner-bootcamp-2023/Public/index.html"
-error_html_filepath= "/workspace/terraform-beginner-bootcamp-2023/Public/error.html"
-content_version = 2
-assets_path = "${ROOT.PROJECT}/Public/assets"
+terratowns_endpoint="https://terratowns.cloud/api"
+index_html_filepath="/workspace/terraform-beginner-bootcamp-2023/Public/index.html"
+error_html_filepath="/workspace/terraform-beginner-bootcamp-2023/Public/error.html"
+assets_path="/workspace/terraform-beginner-bootcamp-2023/public/assets/"
+content_version=1
