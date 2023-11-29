@@ -50,8 +50,3 @@ DESCRIPTION
   town = "gamers-grotto"
   content_version = 1
 }
-
-
-
-
-
